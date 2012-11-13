@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="internalOnly" package="com.grocery.service" android:versionCode="1" android:versionName="Android">
+  <uses-sdk android:targetSdkVersion="8" />
+  <application android:label="Grocery Service">
+  </application>
+  <uses-permission android:name="android.permission.INTERNET" />
+</manifest>

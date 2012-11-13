@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="GetVersion">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVersionResult" type="tns:ShopList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ShopList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShopItems" type="tns:ArrayOfShopItem" />
+          <s:element minOccurs="1" maxOccurs="1" name="Version" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfShopItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ShopItem" nillable="true" type="tns:ShopItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShopItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Valute" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsBought" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UploadVersion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:ShopList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadVersionResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="char">
+        <s:restriction base="s:unsignedShort" />
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVersion" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadVersion" />
+  </wsdl:message>
+  <wsdl:message name="UploadVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadVersionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GroceryServiceSoap">
+    <wsdl:operation name="GetVersion">
+      <wsdl:input message="tns:GetVersionSoapIn" />
+      <wsdl:output message="tns:GetVersionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadVersion">
+      <wsdl:input message="tns:UploadVersionSoapIn" />
+      <wsdl:output message="tns:UploadVersionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GroceryServiceSoap" type="tns:GroceryServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetVersion">
+      <soap:operation soapAction="http://tempuri.org/GetVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadVersion">
+      <soap:operation soapAction="http://tempuri.org/UploadVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GroceryServiceSoap12" type="tns:GroceryServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetVersion">
+      <soap12:operation soapAction="http://tempuri.org/GetVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadVersion">
+      <soap12:operation soapAction="http://tempuri.org/UploadVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GroceryService">
+    <wsdl:port name="GroceryServiceSoap" binding="tns:GroceryServiceSoap">
+      <soap:address location="http://voicegrocery.akhmed.ru/GroceryService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GroceryServiceSoap12" binding="tns:GroceryServiceSoap12">
+      <soap12:address location="http://voicegrocery.akhmed.ru/GroceryService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
